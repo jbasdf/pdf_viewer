@@ -2,15 +2,16 @@
 
 import React                    from 'react';
 import assets                   from '../libs/assets';
+import PdfViewer                from './pdf';
+
 
 class Home extends React.Component {
 
   render(){
-
-    const img = assets("./images/atomicjolt.jpg");
-
+    var pdf = assets("./pdfs/wiley-lo.pdf");
     return<div>
-    <img src={img} />
+      <PdfViewer pdf={pdf} />
+      <a href="http://www.opencontent.org/docs/wiley-lo-review-final.pdf">Example pdf</a> by David Wiley from <a href="http://www.opencontent.org">opencontent.org</a>
     </div>;
   }
 

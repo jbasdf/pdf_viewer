@@ -106,8 +106,8 @@ module.exports = function(stage){
     { test: /\.scss$/i,           loader: extractCSS.extract(scssLoaders) },
     { test: /\.css$/i ,           loader: extractCSS.extract(cssLoaders) },
     { test: /\.less$/i ,          loader: extractCSS.extract(lessLoaders) },
-    { test: /.*\.(gif|png|jpg|jpeg|svg)$/, loaders: ['url?limit=5000&hash=sha512&digest=hex&size=16&name=[name]-[hash].[ext]']}, //'image-webpack-loader?optimizationLevel=7&interlaced=false'
-    { test: /.*\.(eot|woff2|woff|ttf)$/,   loaders: ['url?limit=5000&hash=sha512&digest=hex&size=16&name=cd [name]-[hash].[ext]']}
+    { test: /.*\.(gif|png|jpg|jpeg|svg)$/,   loaders: ['url?limit=5000&hash=sha512&digest=hex&size=16&name=[name]-[hash].[ext]']}, //'image-webpack-loader?optimizationLevel=7&interlaced=false'
+    { test: /.*\.(eot|woff2|woff|ttf|pdf)$/, loaders: ['url?limit=5000&hash=sha512&digest=hex&size=16&name=[name]-[hash].[ext]']}
   ];
 
   return {

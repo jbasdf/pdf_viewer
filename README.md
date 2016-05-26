@@ -1,6 +1,9 @@
-#React Client Starter App
+#React PDF Viewer
 -----------------------
-There are many starter kits that will help you get started with React and Redux. This is the one created by, maintained by and used by [Atomic Jolt](http://www.atomicjolt.com). Atomic Jolt uses this as application as a starting place for our [Ruby on Rails React starter application](https://github.com/atomicjolt/react_starter_app) and our [Firebase React starter appliction](https://github.com/atomicjolt/react_firebase_starter_app).
+This is an example that shows how to use <a href="https://mozilla.github.io/pdf.js/">pdf.js</a> to display a pdf
+in your <a href="https://facebook.github.io/react/">React</a> application. It is derived from the
+<a href="https://github.com/atomicjolt/react_client_starter_app">React Client Starter app</a> from
+<a href="http://www.atomicjolt.com">Atomic Jolt</a>.
 
 
 #Getting Started:
@@ -8,7 +11,7 @@ There are many starter kits that will help you get started with React and Redux.
 
 Make sure to install git and npm before you start then:
 
-1. git clone https://github.com/atomicjolt/react_client_starter_app.git my_project_name
+1. git clone https://github.com/jbasdf/pdf_viewer.git my_project_name
 2. Rename .env.example to .env. This file contains the port the server will use. The default 8080 should be fine, but you can also use a local domain or ngrok if you wish.
 3. npm install
 4. Start server with:
@@ -18,7 +21,7 @@ Make sure to install git and npm before you start then:
 then visit http://localhost:8080
 
 
-# Using the React Client Starter App
+# Development
 -----------------------
 Source code lives in the client directory. Modify html and js files in that directory to build your application.
 
