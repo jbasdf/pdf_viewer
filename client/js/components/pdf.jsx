@@ -15,17 +15,18 @@ class Home extends React.Component {
   }
 
   componentWillMount(){
-    this.updatePdf();
+    this.updatePdf(this.props);
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.pdf != this.props.pdf){
-      this.updatePdf();
+      this.updatePdf(nextProps);
     }
   }
 
   componentDidMount(){
     this.renderPdfPages();
+    window.addEventListener('resize', _.debounce(this.renderPdfPages.bind(this), 150));
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -34,8 +35,8 @@ class Home extends React.Component {
     }
   }
 
-  updatePdf(){
-    PDFJS.getDocument(this.props.pdf).then((pdf) => {
+  updatePdf(props){
+    PDFJS.getDocument(props.pdf).then((pdf) => {
       this.setState({
         pdf,
         numPages: pdf.numPages
@@ -48,29 +49,43 @@ class Home extends React.Component {
   }
 
   renderPdfPage(pageNum){
+
     this.state.pdf.getPage(pageNum + 1).then((page) => {
-      var scale = 1;
+      var scale = 1; // Changes the size of the pdf in the html page
       var viewport = page.getViewport(scale);
 
       var canvas = this.refs[`canvas${pageNum}`];
       var context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+
+      // Compensate for hi-def monitors by adjusting the backingStore. We get the devicePixelRatio
+      // and adjust the actual Canvas by that amount while leaving the css styling the original value.
+      var devicePixelRatio = window.devicePixelRatio || 1;
+      var width = canvas.clientWidth;
+      var height = Math.round(width * viewport.height / viewport.width);
+      canvas.style.height = `${height}px`;
+
+      canvas.width = width * devicePixelRatio;
+      canvas.height = height * devicePixelRatio;
+
+      var ratio = width * devicePixelRatio / viewport.width;
+      context.scale(ratio, ratio);
 
       var renderContext = {
         canvasContext: context,
         viewport: viewport
       };
       page.render(renderContext);
+
     });
   }
 
   render(){
+    const styles = { width: "100%" };
     const canvases = _.times(this.state.numPages).map((pageNum) => {
       const key = `canvas${pageNum}`;
-      return <canvas key={key} ref={key}></canvas>;
+      return <canvas key={key} style={ styles } ref={key}></canvas>;
     });
-    return<div>
+    return<div style={ styles }>
       {canvases}
     </div>;
   }
